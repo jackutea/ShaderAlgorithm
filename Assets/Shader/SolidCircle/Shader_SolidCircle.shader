@@ -43,9 +43,9 @@ Shader "ShaderAlgorithm/Shader_SolidCircle"
             {
                 float2 center = float2(0.5f, 0.5f);
                 float2 diff = i.uv - center;
-                float dist_sqr = dot(diff, diff);
+                float dist = length(diff);
                 float radius = 0.25f;
-                float a = 1.0f - smoothstep(radius, radius + 0.08f, sqrt(dist_sqr));
+                float a = 1.0f - smoothstep(radius, radius + 0.08f, dist);
                 return _Color * a;
             }
             ENDCG
