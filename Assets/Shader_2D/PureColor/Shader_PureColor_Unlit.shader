@@ -1,4 +1,4 @@
-Shader "ShaderAlgorithm/Shader_SolidCircle"
+Shader "ShaderAlgorithm/2D/Shader_PureColor_Unlit"
 {
     Properties
     {
@@ -29,7 +29,7 @@ Shader "ShaderAlgorithm/Shader_SolidCircle"
                 float4 vertex : SV_POSITION;
             };
 
-            float4 _Color;
+            fixed4 _Color;
 
             v2f vert (appdata v)
             {
@@ -41,12 +41,7 @@ Shader "ShaderAlgorithm/Shader_SolidCircle"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 center = float2(0.5f, 0.5f);
-                float2 diff = i.uv - center;
-                float dist = length(diff);
-                float radius = 0.25f;
-                float a = 1.0f - smoothstep(radius, radius + 0.08f, dist);
-                return _Color * a;
+                return _Color;
             }
             ENDCG
         }

@@ -1,4 +1,9 @@
 ```
+// 所有接口可以在#include 的文件中查看, 例如: UnityCG.cginc
+```
+
+```
+
 // smoothstep function
 // x: input value
 // edge0: lower edge

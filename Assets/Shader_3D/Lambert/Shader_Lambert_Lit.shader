@@ -1,8 +1,9 @@
-Shader "ShaderAlgorithm/MainTexture_Unlit"
+Shader "ShaderAlgorithm/3D/Shader_Lambert_Lit"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _Color ("Color", Color) = (1,1,1,1)
+        _AmbientColor ("Ambient Color", Color) = (0.1,0.1,0.1,1)
     }
     SubShader
     {
@@ -21,34 +22,35 @@ Shader "ShaderAlgorithm/MainTexture_Unlit"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;
             };
 
             struct v2f
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 normal : NORMAL;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+            uniform float4 _Color;
+            uniform float4 _AmbientColor;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                // o.uv = v.uv;
+                o.uv = v.uv;
+                o.normal = UnityObjectToWorldNormal(v.normal);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                if (col.a == 0) {
-                    discard;
-                }
-                return col;
+                float3 lightDir = _WorldSpaceLightPos0.xyz;
+                float d = dot(i.normal, lightDir);
+                d = max(d, 0);
+                
+                return _Color * d;
             }
             ENDCG
         }
