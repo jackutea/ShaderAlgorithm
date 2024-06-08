@@ -1,4 +1,4 @@
-Shader "ShaderAlgorithm/2D/MainTexture_Unlit"
+Shader "ShaderAlgorithm/2D/Pixelize"
 {
     Properties
     {
@@ -39,11 +39,14 @@ Shader "ShaderAlgorithm/2D/MainTexture_Unlit"
             }
 
             fixed4 frag (v2f i) : SV_Target {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                
+                // pixelize sample
+                float4 col = tex2D(_MainTex, i.uv);
+
                 if (col.a == 0) {
                     discard;
                 }
+
                 return col;
             }
             ENDCG

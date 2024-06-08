@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_MainTexture_Circle
-  m_Shader: {fileID: 4800000, guid: dad098d4c39b6774b83a90750537a12b, type: 3}
+  m_Name: Mat_Pixelize
+  m_Shader: {fileID: 4800000, guid: f542430e5568cd042beed9cac3924c8d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -71,7 +71,10 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _PPU: 16
     - _Parallax: 0.02
+    - _PixelVariant: 16
+    - _Pow: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
